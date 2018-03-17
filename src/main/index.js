@@ -10,6 +10,7 @@ if (process.env.NODE_ENV !== 'development') {
   global.__static = require('path').join(__dirname, '/static').replace(/\\/g, '\\\\')
 }
 
+app.commandLine.appendSwitch('disable-renderer-backgrounding')
 let mainWindow
 const winURL = process.env.NODE_ENV === 'development' ? `http://localhost:9080` : `file://${__dirname}/index.html`
 
@@ -21,11 +22,14 @@ function createWindow () {
     useContentSize: true,
     transparent: true,
     frame: false,
-    alwaysOnTop: true
+    alwaysOnTop: true,
+    hasShadow: false,
+    show: false
   })
   mainWindow.maximize()
   mainWindow.setIgnoreMouseEvents(true)
   mainWindow.loadURL(winURL)
+  mainWindow.showInactive()
 
   setInterval(() => {
     const mouse = screen.getCursorScreenPoint()

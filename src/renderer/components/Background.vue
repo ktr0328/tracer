@@ -68,13 +68,13 @@ export default {
   methods: {
     sketch: function (p) {
       p.setup = () => {
-        p.background(0, 0, 0, 100)
         p.createCanvas(document.body.clientWidth, document.body.clientHeight)
       }
 
       p.draw = () => {
         p.clear()
         p.noStroke()
+        p.smooth()
 
         p.ellipseMode(p.CENTER)
         this.particles.forEach(e => {
